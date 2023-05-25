@@ -1,0 +1,23 @@
+@import "../../assets/style/general.module.scss";
+
+.root {
+  width: max-content;
+  min-height: 100%;
+  border-radius: max(0.5vh, 0.5vw);
+  border-radius: 5vh;
+  padding: 0 max(0.7vw, 7px);
+
+  background-color: $siteBgColor;
+  color: #fff;
+  border: none;
+
+  cursor: pointer;
+  transition: all 0.5s ease;
+
+  @include disableSelect();
+
+  &.disableFill {
+    background-color: transparent;
+    color: #000;
+  }
+}

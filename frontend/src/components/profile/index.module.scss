@@ -1,0 +1,27 @@
+@import "../../assets/style/general.module.scss";
+
+.root {
+  width: 80%;
+
+  h3 {
+    font-size: 2vh;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    max-width: 20%;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  button {
+    margin-top: $marginTopScreen;
+    min-height: 40px;
+  }
+}

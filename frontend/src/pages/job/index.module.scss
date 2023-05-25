@@ -1,0 +1,34 @@
+@import "../../assets/style/general.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include container();
+
+  & > div {
+    width: 100%;
+    &:not(:first-of-type) {
+      margin-top: $marginTopScreen;
+    }
+  }
+}
+
+.vac {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  &:not(:first-of-type) {
+    margin-top: calc($marginTop * 2);
+  }
+}
+
+.asd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

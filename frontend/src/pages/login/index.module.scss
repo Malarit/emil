@@ -1,0 +1,45 @@
+@import "../../assets/style/general.module.scss";
+
+.root {
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  @include container();
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100%;
+
+    &:not(:first-of-type) {
+      margin-top: $marginTopScreen;
+    }
+  }
+}
+
+.myFeed {
+  min-width: 80%;
+
+  &:not(:first-of-type) {
+    margin-top: $marginTopScreen;
+  }
+}
+
+.box {
+  & > div {
+    & div {
+      display: flex;
+      
+    }
+    span {
+      margin-left: 15px;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@import "../../assets/style/general.module.scss";
+
+.root {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  & > span {
+    color: red;
+  }
+}
+
+.button {
+  margin-top: calc($marginTop * 2);
+  min-height: max(40px, 4vh);
+}

@@ -1,0 +1,25 @@
+@import "../../assets/style/general.module.scss";
+
+.root {
+  width: 60%;
+  overflow-wrap: break-word;
+  textarea {
+    resize: vertical;
+    width: 100%;
+    margin-top: $marginTop;
+    margin-top: $marginTopScreen;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  button {
+   
+    min-height: max(35px, 3.5vh);
+
+    &:not(:first-of-type) {
+      margin-left: max(1.5vw, 15px);
+    }
+  }
+}

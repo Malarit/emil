@@ -1,0 +1,10 @@
+@import "../../assets/style/general.module.scss";
+
+.root {
+  width: 60%;
+
+  button {
+    margin-top: $marginTopScreen;
+    min-height: max(35px, 3.5vh);
+  }
+}
