@@ -19,6 +19,7 @@ const HeaderContainer: React.FC = () => {
   const navigate = useNavigate();
   const { data } = useQuery("user", getUser, {
     refetchOnWindowFocus: false,
+    retry: false,
   });
   const onClickButton = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>

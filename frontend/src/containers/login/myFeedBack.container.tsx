@@ -2,14 +2,14 @@ import { MouseEvent } from "react";
 import { useQuery } from "react-query";
 import Box from "../../components/box";
 import Vacancy from "../../components/vacancy";
-import { getJustFeedback, getVacancy } from "../../services/req";
+import { getJustFeedback, getVacancy, vac } from "../../services/req";
 
 const MyFeedBackContainer: React.FC<{
   className?: string;
   classNameBox?: string;
 }> = ({ className, classNameBox }) => {
   const { data: feedBack } = useQuery("feedBack", getJustFeedback);
-  const { data } = useQuery("vacancy", getVacancy);
+  const { data } = useQuery("vacancy", () => getVacancy<vac[]>());
 
   const check = (flag: boolean | undefined) => {
     if (flag) return "Ожидайте приглашения на почту";
@@ -32,6 +32,7 @@ const MyFeedBackContainer: React.FC<{
             className={className}
             hideButton={true}
             onClick={() => {}}
+            linkToId={vac?.id || 0}
           />
           <Box
             className={classNameBox}
@@ -51,7 +52,11 @@ const MyFeedBackContainer: React.FC<{
 
   return (
     <>
-      <h3>Отклики</h3> {get()}
+      {feedBack?.length && (
+        <>
+          <h3>Отклики</h3> {get()}
+        </>
+      )}
     </>
   );
 };

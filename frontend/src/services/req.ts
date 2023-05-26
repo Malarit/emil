@@ -39,17 +39,21 @@ export const clearMe = () => {
   return axios.get("/clearMe");
 };
 
-export const getVacancy = async () => {
-  const req = await axios.get<
-    {
-      header: string;
-      description: string;
-      type: string;
-      id: number;
-    }[]
-  >("/vacancy");
-  return req.data;
+export type vac = {
+  header: string;
+  description: string;
+  type: string;
+  id: number;
 };
+export async function getVacancy<T extends vac | vac[]>(id?: number) {
+  const req = await axios.get<T>("/vacancy", {
+    params: {
+      id,
+    },
+  });
+
+  return req.data;
+}
 
 export const postFeedback = (data: { vacancy_id: number }) => {
   return axios.post("/feedback", data);

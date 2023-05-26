@@ -1,6 +1,6 @@
 import React from "react";
 import Box from "../../components/box";
-import next from "../../assets/img/About/zxc.png";
+import next from "../../assets/img/about/zxc.png";
 
 import style from "./index.module.scss";
 
