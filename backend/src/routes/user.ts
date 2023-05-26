@@ -1,16 +1,14 @@
-import { Request, Response, Router } from "express";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import { Router } from "express";
 
 import * as req from "./type.js";
 
 import { Feedback, Resume, User, Vacancy } from "../models/models.js";
 import { getHash, verifieHash } from "../utils/hashedPassword.js";
 import { config, cookie } from "../config/config.js";
-import { jwtSign, jwtVerify } from "../utils/jwt.js";
+import { jwtSign } from "../utils/jwt.js";
 import { bdFindOne } from "../db/query.js";
 
 import verifyToken from "../utils/verifyToken.js";
-import { upload } from "../middleware/upload.js";
 import { Op } from "sequelize";
 import objToArray from "../utils/objToArray.js";
 
@@ -101,7 +99,7 @@ router.post("/registration", async (req: req.reg, res) => {
     const { password, email, firstName, secondName, role } = req.body;
 
     const hashPassword = await getHash(password);
-  
+
     await User.build({
       firstName,
       secondName,
@@ -148,32 +146,6 @@ router.get("/user", async (req, res) => {
   res.status(200).json({ ...user, ...resume });
 });
 
-router.get("/userAdmin", async (req, res) => {
-  const user = await User.findAll();
-  res.status(200).json(user);
-});
-
-router.put("/userAdmin", async (req: req.putUserAdmin, res) => {
-  const { id, firstName, secondName, email, role } = req.body;
-
-  const user = await User.findOne({
-    where: {
-      id,
-    },
-  });
-
-  user
-    ?.set({
-      firstName,
-      secondName,
-      email,
-      role,
-    })
-    .save();
-
-  res.status(200).json("Ok");
-});
-
 router.put("/user", async (req: req.userPut, res) => {
   const id = await verifyToken(req, res);
   if (!id) return;
@@ -206,26 +178,6 @@ router.put("/user", async (req: req.userPut, res) => {
   res.status(200).json("Ok");
 });
 
-router.post("/vacancy", async (req: req.vacancyPost, res) => {
-  const { header, description, type } = req.body;
-  try {
-    Vacancy.build({
-      header,
-      description,
-      type,
-    }).save();
-
-    res.status(200).json("Ok");
-  } catch (err) {
-    res.status(400).json({ Error: err });
-  }
-});
-
-router.get("/vacancy", async (req, res) => {
-  const vacancy = await Vacancy.findAll();
-  res.status(200).json(vacancy);
-});
-
 router.post("/feedback", async (req: req.postFeedback, res) => {
   const id = await verifyToken(req, res);
   if (!id) return;
@@ -241,6 +193,7 @@ router.post("/feedback", async (req: req.postFeedback, res) => {
 });
 
 router.get("/justFeedback", async (req, res) => {
+  // Для юсера
   const id = await verifyToken(req, res);
   if (!id) return;
 
@@ -254,6 +207,7 @@ router.get("/justFeedback", async (req, res) => {
 });
 
 router.get("/feedback", async (req: req.feedbackGet, res) => {
+  // Для сотрудника
   const { vacancy_id } = req.query;
 
   const feedbacks = (
@@ -305,8 +259,6 @@ router.get("/feedback", async (req: req.feedbackGet, res) => {
 router.post("/updateFeedback", async (req: req.updateFeedbackPost, res) => {
   const { id, state } = req.body;
 
-  console.log(id, state);
-
   const feedback = await Feedback.findOne({
     where: {
       user_id: id,
@@ -320,6 +272,24 @@ router.post("/updateFeedback", async (req: req.updateFeedbackPost, res) => {
     .save();
 
   res.status(200).json("Ok");
+});
+
+router.get("/vacancy", async (req: req.getVacancy, res) => {
+  const { id } = req.query;
+
+  try {
+    const vacancy = id
+      ? await bdFindOne(Vacancy, {
+          where: {
+            id,
+          },
+        })
+      : await Vacancy.findAll();
+
+    res.status(200).json(vacancy);
+  } catch (error) {
+    res.status(400).json({ Failed: error });
+  }
 });
 
 export default router;
