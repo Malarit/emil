@@ -1,0 +1,32 @@
+@import "../../assets/style/general.module.scss";
+
+.root {
+  // margin-bottom: $marginTopScreen;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  pointer-events: none;
+}
+
+.container {
+  @include container();
+
+  & > hr {
+    opacity: 0.4;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    font-size: 14px;
+    display: flex;
+  }
+
+  img {
+    max-width: 100%;
+    height: 35px;
+  }
+}
