@@ -69,7 +69,7 @@ export const Vacancy: mt.vacancy_model = sequelize.define("Vacancy", {
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   type: {

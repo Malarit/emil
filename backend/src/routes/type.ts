@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { resume } from "../models/types.js";
 
 export interface TypedRequest<T> extends Request<{}, {}, T, T> {
   body: T;
@@ -33,6 +34,16 @@ type vacancy = {
 };
 export type vacancyPost = TypedRequest<vacancy>;
 
+type vacancyGet = {
+  id?: number;
+};
+export type getVacancy = TypedRequest<vacancyGet>;
+
+type vacancyPut = {
+  id: number;
+} & vacancy;
+export type putVacancy = TypedRequest<vacancyPut>;
+
 type feedback = {
   vacancy_id: number;
 };
@@ -42,6 +53,14 @@ type feedbackPost = {
   vacancy_id: number;
 };
 export type postFeedback = TypedRequest<feedbackPost>;
+
+type feedbackPut = {
+  id: number;
+  user_id: number;
+  vacancy_id: number;
+  state: boolean;
+};
+export type putFeedback = TypedRequest<feedbackPut>
 
 type updateFeedback = {
   id: number;
@@ -57,3 +76,5 @@ type userAdmin = {
   role: "admin" | "user" | "worker";
 };
 export type putUserAdmin = TypedRequest<userAdmin>;
+
+export type putResume = TypedRequest<resume>

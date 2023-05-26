@@ -12,7 +12,7 @@ interface user {
 }
 export type user_model = ModelDefined<user, nodeAttributes<user, "id">>;
 
-interface resume {
+export interface resume {
   id: number;
   about: string;
   city: string;
