@@ -1,0 +1,12 @@
+@import "../../assets/style/general.module.scss";
+
+.root {
+  width: 100%;
+}
+
+.container {
+  @include container();
+  display: flex;
+  justify-content: center;
+  
+}

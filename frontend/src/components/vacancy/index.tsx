@@ -4,19 +4,32 @@ import Box from "../box";
 
 import style from "./index.module.scss";
 import Button from "./../button/index";
+import { Link } from "react-router-dom";
 
 type vacancy = {
   header: string;
   description: string;
   disableButton: boolean;
   onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  linkToId: number;
   hideButton?: boolean;
   className?: string;
+  hideLink?: boolean;
+  disableTextSlice?: boolean;
 };
 
 const Vacancy: React.FC<vacancy> = (props) => {
-  const { header, description, disableButton, onClick, hideButton, className } =
-    props;
+  const {
+    header,
+    description,
+    disableButton,
+    onClick,
+    hideButton,
+    className,
+    linkToId,
+    hideLink,
+    disableTextSlice,
+  } = props;
 
   return (
     <Box
@@ -24,15 +37,20 @@ const Vacancy: React.FC<vacancy> = (props) => {
       header={header}
       body={
         <>
-          <div>{description}</div>
+          <div className={cn({ [style.description]: !disableTextSlice })}>
+            {description}
+          </div>
           <div>
-            {!hideButton && (
-              <Button
-                onClick={onClick}
-                text={"Откликнуться"}
-                disableFill={disableButton}
-              />
-            )}
+            <div className={style.buttons}>
+              {!hideButton && (
+                <Button
+                  onClick={onClick}
+                  text={"Откликнуться"}
+                  disableFill={disableButton}
+                />
+              )}
+              {!hideLink && <Link to={`/vacancy/${linkToId}`}>Подробнее</Link>}
+            </div>
           </div>
         </>
       }

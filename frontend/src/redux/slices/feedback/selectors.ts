@@ -1,3 +1,3 @@
 import { RootState } from "../..";
 
-export const selectUserId = (state: RootState) => state.userReducer.user_id;
+export const selectFeedbacks = (state: RootState) => state.feedbackReducer.data;

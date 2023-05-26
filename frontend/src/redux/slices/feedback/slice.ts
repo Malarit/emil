@@ -1,36 +1,45 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { isMeGet } from "../../../services/req";
+import { getJustFeedback, isMeGet } from "../../../services/req";
 
-export const fetchFeedback = createAsyncThunk<{ id: number }>(
-  "user/fetchFeedback",
+type feedBack = {
+  user_id: number;
+  vacancy_id: number;
+  state: boolean;
+  createdAt?: string;
+};
+
+export const fetchFeedback = createAsyncThunk<feedBack[]>(
+  "Feedback/fetchFeedback",
   async () => {
-    return isMeGet();
+    return getJustFeedback();
   }
 );
 
-const initialState: { user_id: number | undefined } = {
-  user_id: undefined,
+const initialState: { data: feedBack[] } = {
+  data: [],
 };
 
 export const feedbackSlice = createSlice({
   name: "Feedback",
   initialState,
   reducers: {
-    set: (state, action: PayloadAction<number | undefined>) => {
-      state.user_id = action.payload;
+    addFeedBack: (
+      state,
+      action: PayloadAction<{ user_id: number; vacancy_id: number }>
+    ) => {
+      state.data.push({ state: false, ...action.payload });
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFeedback.fulfilled, (state, action) => {
-        state.user_id = action.payload.id;
+        state.data = action.payload;
+        console.log(state);
       })
-      .addCase(fetchFeedback.rejected, (state, action) => {
-        state.user_id = undefined;
-      });
+      .addCase(fetchFeedback.rejected, (state, action) => {});
   },
 });
 
-export const { set } = feedbackSlice.actions;
+export const { addFeedBack } = feedbackSlice.actions;
 
 export default feedbackSlice.reducer;

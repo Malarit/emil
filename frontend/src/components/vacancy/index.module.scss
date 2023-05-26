@@ -2,9 +2,31 @@
 
 .root {
   width: 60%;
-
   button {
-    margin-top: $marginTopScreen;
     min-height: max(35px, 3.5vh);
+  }
+}
+
+.description {
+  overflow: hidden;
+  max-height: 10vh;
+  -webkit-box-orient: vertical;
+  display: block;
+  display: -webkit-box;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: max(35px, 3.5vh);
+  margin-top: $marginTopScreen;
+
+  a {
+    text-decoration: none;
   }
 }
