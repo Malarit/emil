@@ -9,7 +9,6 @@ import { jwtSign } from "../utils/jwt.js";
 import { bdFindOne } from "../db/query.js";
 
 import verifyToken from "../utils/verifyToken.js";
-import { Op } from "sequelize";
 import objToArray from "../utils/objToArray.js";
 
 const router = Router();

@@ -13,7 +13,11 @@ const Job: React.FC = () => {
       <div className={style.container}>
         {role == "worker"}
         <div>
-          <VacancyContainer className={style.vac} classNameASD={style.asd} />
+          <VacancyContainer
+            className={style.vac}
+            classNameASD={style.asd}
+            paginateClassName={style.paginateClassName}
+          />
         </div>
       </div>
     </div>

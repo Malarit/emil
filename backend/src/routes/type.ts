@@ -27,6 +27,11 @@ type user = {
 };
 export type userPut = TypedRequest<user>;
 
+type userDelete = {
+  id: number;
+};
+export type deleteUser = TypedRequest<userDelete>;
+
 type vacancy = {
   header: string;
   description: string;
@@ -60,7 +65,7 @@ type feedbackPut = {
   vacancy_id: number;
   state: boolean;
 };
-export type putFeedback = TypedRequest<feedbackPut>
+export type putFeedback = TypedRequest<feedbackPut>;
 
 type updateFeedback = {
   id: number;
@@ -77,4 +82,4 @@ type userAdmin = {
 };
 export type putUserAdmin = TypedRequest<userAdmin>;
 
-export type putResume = TypedRequest<resume>
+export type putResume = TypedRequest<resume>;

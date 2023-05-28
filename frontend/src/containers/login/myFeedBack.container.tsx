@@ -24,7 +24,7 @@ const MyFeedBackContainer: React.FC<{
       const vac = data.find((vac) => vac.id === item.vacancy_id);
 
       return (
-        <>
+        <>      
           <Vacancy
             header={vac?.header || ""}
             description={vac?.description || ""}
@@ -52,7 +52,7 @@ const MyFeedBackContainer: React.FC<{
 
   return (
     <>
-      {feedBack?.length && (
+      {feedBack && feedBack.length > 0 && (
         <>
           <h3>Отклики</h3> {get()}
         </>

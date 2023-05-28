@@ -31,6 +31,18 @@ router.put("/user", async (req: req.putUserAdmin, res) => {
   res.status(200).json("Ok");
 });
 
+router.delete("/user", async (req: req.deleteUser, res) => {
+  const { id } = req.query;
+  console.log(id);
+  await User.destroy({
+    where: {
+      id,
+    },
+  });
+
+  res.status(200).json("Ok");
+});
+
 router.post("/vacancy", async (req: req.vacancyPost, res) => {
   const { header, description, type } = req.body;
   try {
@@ -61,6 +73,18 @@ router.put("/vacancy", async (req: req.putVacancy, res) => {
   } catch (err) {
     res.status(400).json({ Error: err });
   }
+});
+
+router.delete("/vacancy", async (req: req.deleteUser, res) => {
+  const { id } = req.query;
+
+  await Vacancy.destroy({
+    where: {
+      id,
+    },
+  });
+
+  res.status(200).json("Ok");
 });
 
 router.put("/feedback", async (req: req.putFeedback, res) => {
